@@ -1,0 +1,14 @@
+﻿services:
+  mssql_server:
+    image: mcr.microsoft.com/mssql/server:2022-latest # TODO: set version tag
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password1234." # TODO: move to .env
+    ports:
+      - "1433:1433" # MSSQL Management connection
+    volumes:
+      - "mssql_data:/var/opt/mssql/"
+
+volumes:
+  mssql_data:

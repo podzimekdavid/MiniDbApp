@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniDbApp.API", "MiniDbApp.API\MiniDbApp.API.csproj", "{01878B21-9457-468F-AA99-66FA383BF979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniDbApp.Database", "MiniDbApp.Database\MiniDbApp.Database.csproj", "{281568D9-E700-4DB9-B379-3285344EBB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniDbApp.Models", "MiniDbApp.Models\MiniDbApp.Models.csproj", "{5F17D8DB-7C2E-44F3-A37F-97D534E44F76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DEPLOY", "DEPLOY", "{A8AFCAB9-5294-4291-8BD5-49A38FC61508}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SRC", "SRC", "{0171D93A-10A7-4CB6-A860-A721CBDD0623}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01878B21-9457-468F-AA99-66FA383BF979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01878B21-9457-468F-AA99-66FA383BF979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01878B21-9457-468F-AA99-66FA383BF979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01878B21-9457-468F-AA99-66FA383BF979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281568D9-E700-4DB9-B379-3285344EBB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281568D9-E700-4DB9-B379-3285344EBB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281568D9-E700-4DB9-B379-3285344EBB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281568D9-E700-4DB9-B379-3285344EBB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F17D8DB-7C2E-44F3-A37F-97D534E44F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F17D8DB-7C2E-44F3-A37F-97D534E44F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F17D8DB-7C2E-44F3-A37F-97D534E44F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F17D8DB-7C2E-44F3-A37F-97D534E44F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01878B21-9457-468F-AA99-66FA383BF979} = {0171D93A-10A7-4CB6-A860-A721CBDD0623}
+		{281568D9-E700-4DB9-B379-3285344EBB5C} = {0171D93A-10A7-4CB6-A860-A721CBDD0623}
+		{5F17D8DB-7C2E-44F3-A37F-97D534E44F76} = {0171D93A-10A7-4CB6-A860-A721CBDD0623}
+	EndGlobalSection
+EndGlobal
