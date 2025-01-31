@@ -1,9 +1,25 @@
+using Microsoft.EntityFrameworkCore;
+using MiniDbApp.Database.Database;
+using MiniDbApp.Lib.Constants;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var database = Environment.GetEnvironmentVariable(Setup.DATBASE_SELECT_ENV);
+
+if (string.IsNullOrEmpty(database) || database == Setup.Database.MSSQL)
+{
+    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseSqlServer());
+}
+else
+{
+    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseInMemoryDatabase(Setup.Database.InMemory.DEFAULT_DATBASE_NAME));
+}
+
 
 var app = builder.Build();
 
