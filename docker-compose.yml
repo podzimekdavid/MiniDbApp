@@ -4,7 +4,7 @@
     restart: always
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Password1234." # TODO: move to .env
+      MSSQL_SA_PASSWORD: "df8ZNQa2PB46kSVthAx.bEM9r37WLTF" # TODO: move to .env
     ports:
       - "1433:1433" # MSSQL Management connection
     volumes:
