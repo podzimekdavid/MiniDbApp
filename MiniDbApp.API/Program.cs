@@ -55,7 +55,8 @@ var database = Environment.GetEnvironmentVariable(Setup.DATBASE_SELECT_ENV);
 
 if (string.IsNullOrEmpty(database) || database == Setup.Database.MSSQL)
 {
-    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseSqlServer());
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
 }
 else
 {
@@ -87,6 +88,6 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-
+app.MapControllers();
 app.Run();
 
