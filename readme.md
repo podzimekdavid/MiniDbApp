@@ -8,7 +8,7 @@ SQL query for create database: ``SQLQueris/ShopDb-init.sql``
 ## Stage 2 - SQL Queries
 
 ```
-SQLQueris/queries.sql
+SQLQueries/queries.sql
 ```
 
 ## Stage 3 - API
