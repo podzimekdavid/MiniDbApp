@@ -23,7 +23,7 @@ public class CustomerController : Controller
     }
 
     [HttpGet(Urls.Api.V1.Customer.LIST)]
-    public List<Customer> List(int index = 0, int count = 10)
+    public List<Customer> List(int index = 0, int count = Setup.Api.DEFAULT_COUNT)
     {
         return _customerDb.Customers(index, count);
     }

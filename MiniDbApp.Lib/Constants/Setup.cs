@@ -16,6 +16,7 @@ public class Setup
 
     public class Api
     {
+        public const int DEFAULT_COUNT = 10;
         public const string API_KEY_HEADER_NAME = "X-API-KEY";
     }
     

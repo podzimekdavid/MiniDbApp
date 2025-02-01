@@ -22,10 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Adapters\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\MiniDbApp.Models\MiniDbApp.Models.csproj" />
     </ItemGroup>
 
