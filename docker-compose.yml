@@ -9,6 +9,13 @@
       - "1433:1433" # MSSQL Management connection
     volumes:
       - "mssql_data:/var/opt/mssql/"
+  web_api:
+    build:
+      context: .
+      dockerfile: MiniDbApp.API/Dockerfile
+    restart: always
+    ports:
+      - "81234:8080"
 
 volumes:
   mssql_data:
