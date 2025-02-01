@@ -5,12 +5,12 @@ using MiniDbApp.Database.Services;
 namespace MiniDbApp.API.Controllers;
 
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class ProductController : Controller
+public class CustomerController : Controller
 {
-    private readonly ProductDbService _productDb;
+    private readonly CustomerDbService _customerDb;
 
-    public ProductController(ProductDbService productDb)
+    public CustomerController(CustomerDbService customerDb)
     {
-        _productDb = productDb;
+        _customerDb = customerDb;
     }
 }

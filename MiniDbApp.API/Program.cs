@@ -1,13 +1,55 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using MiniDbApp.API.Filters;
 using MiniDbApp.Database.Database;
+using MiniDbApp.Database.Services;
 using MiniDbApp.Lib.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
+
+#region Swagger setup
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "ShopAPI", Version = "v1", Contact = new OpenApiContact()
+        {
+            Name = "David Podzimek",
+            Email = "davidpodzimek1@gmail.com"
+        }
+    });
+    
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Name = Setup.Api.API_KEY_HEADER_NAME,
+        Type = SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Header,
+        Description = $"Enter your API key in the format: {Setup.Api.API_KEY_HEADER_NAME} <your-key>"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "ApiKey"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
+
+#endregion
+
+#region Database select/setup
 
 var database = Environment.GetEnvironmentVariable(Setup.DATBASE_SELECT_ENV);
 
@@ -17,8 +59,22 @@ if (string.IsNullOrEmpty(database) || database == Setup.Database.MSSQL)
 }
 else
 {
-    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseInMemoryDatabase(Setup.Database.InMemory.DEFAULT_DATBASE_NAME));
+    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder =>
+        optionsBuilder.UseInMemoryDatabase(Setup.Database.InMemory.DEFAULT_DATBASE_NAME));
 }
+
+#endregion
+
+#region Services
+
+builder.Services.AddScoped<ApiKeyAuthFilter>();
+
+builder.Services.AddScoped<CustomerDbService>();
+builder.Services.AddScoped<OrderDbService>();
+builder.Services.AddScoped<ProductDbService>();
+
+#endregion
+
 
 
 var app = builder.Build();
@@ -31,30 +87,6 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-//
-// var summaries = new[]
-// {
-//     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-// };
-//
-// app.MapGet("/weatherforecast", () =>
-//     {
-//         var forecast = Enumerable.Range(1, 5).Select(index =>
-//                 new WeatherForecast
-//                 (
-//                     DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//                     Random.Shared.Next(-20, 55),
-//                     summaries[Random.Shared.Next(summaries.Length)]
-//                 ))
-//             .ToArray();
-//         return forecast;
-//     })
-//     .WithName("GetWeatherForecast")
-//     .WithOpenApi();
 
 app.Run();
 
-// record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-// {
-//     public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
-// }

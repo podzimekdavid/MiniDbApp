@@ -1,6 +1,6 @@
 ﻿namespace MiniDbApp.Database.Services;
 
-public class UserDbService
+public class CustomerDbService
 {
     
 }
