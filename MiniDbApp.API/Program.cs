@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = Setup.Api.API_KEY_HEADER_NAME,
         Type = SecuritySchemeType.ApiKey,
         In = ParameterLocation.Header,
-        Description = $"Enter your API key in the format: {Setup.Api.API_KEY_HEADER_NAME} <your-key>"
+        Description = $"Enter your API key: <your-key>"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement

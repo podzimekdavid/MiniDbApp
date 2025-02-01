@@ -47,18 +47,29 @@ public class OrderController : Controller
 
     [HttpGet(Urls.Api.V1.Order.ADD_ITEM)]
     [HttpGet(Urls.Api.V1.Order.UPDATE_ITEM)]
-    public IActionResult AddOrEditItem(Guid orderId, Guid productId, int quantity)
+    public IActionResult AddOrEditItem(Guid orderId, Guid productId, int quantity) // TODO: TryParse Guid
     {
         _orderDb.AddOrEditItem(orderId, productId, quantity);
 
         return Ok();
     }
-    
+
     [HttpGet(Urls.Api.V1.Order.REMOVE_ITEM)]
-    public IActionResult RemoveItem(Guid orderId, Guid productId)
+    public IActionResult RemoveItem(Guid orderId, Guid productId) // TODO: TryParse Guid
     {
         _orderDb.AddOrEditItem(orderId, productId, 0);
 
         return Ok();
+    }
+
+    [HttpGet(Urls.Api.V1.Order.ITEM_LIST)]
+    public List<OrderProduct>? Items(string id)
+    {
+        if (Guid.TryParse(id, out Guid orderId))
+        {
+            return _orderDb.Items(orderId);
+        }
+
+        return null; 
     }
 }

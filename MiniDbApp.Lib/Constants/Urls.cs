@@ -29,9 +29,11 @@ public class Urls
                 public const string CUSTOMER_LIST = "/api/v1/order/bycustomer/list";
                 public const string CREATE = "/api/v1/order/create";
                 
+                public const string ITEM_LIST = "/api/v1/order/items/lsit";
                 public const string ADD_ITEM = "/api/v1/order/items/add";
                 public const string UPDATE_ITEM = "/api/v1/order/items/update";
                 public const string REMOVE_ITEM = "/api/v1/order/items/remove";
+                
             }
         }
     }
