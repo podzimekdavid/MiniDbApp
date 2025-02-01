@@ -1,6 +1,6 @@
 ﻿services:
   mssql_server:
-    image: mcr.microsoft.com/mssql/server:2022-latest # TODO: set version tag
+    image: 'mcr.microsoft.com/mssql/server:2022-latest' # TODO: set version tag
     restart: always
     environment:
       ACCEPT_EULA: "Y"
@@ -12,7 +12,7 @@
   web_api:
     build:
       context: .
-      dockerfile: MiniDbApp.API/Dockerfile
+      dockerfile: 'MiniDbApp.API/Dockerfile'
     restart: always
     ports:
       - "81234:8080"
