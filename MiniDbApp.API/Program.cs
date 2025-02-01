@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MiniDbApp.API.DemoData;
 using MiniDbApp.API.Filters;
 using MiniDbApp.Database.Database;
 using MiniDbApp.Database.Services;
@@ -22,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
             Email = "davidpodzimek1@gmail.com"
         }
     });
-    
+
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
         Name = Setup.Api.API_KEY_HEADER_NAME,
@@ -53,15 +54,15 @@ builder.Services.AddSwaggerGen(c =>
 
 var database = Environment.GetEnvironmentVariable(Setup.DATBASE_SELECT_ENV);
 
-if (string.IsNullOrEmpty(database) || database == Setup.Database.MSSQL)
-{
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
-}
-else
+if (string.IsNullOrEmpty(database) || database == Setup.Database.IN_MEMORY)
 {
     builder.Services.AddDbContext<ShopDbContext>(optionsBuilder =>
         optionsBuilder.UseInMemoryDatabase(Setup.Database.InMemory.DEFAULT_DATBASE_NAME));
+}
+else
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    builder.Services.AddDbContext<ShopDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
 }
 
 #endregion
@@ -77,7 +78,6 @@ builder.Services.AddScoped<ProductDbService>();
 #endregion
 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -88,6 +88,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+
+#region Create demo data
+
+app.Services.SeedDatabase();
+
+#endregion
+
 app.MapControllers();
 app.Run();
-

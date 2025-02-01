@@ -40,4 +40,9 @@ public class ProductDbService
 
         _database.SaveChanges();
     }
+
+    public int Count()
+    {
+        return _database.Products.Count();
+    }
 }
