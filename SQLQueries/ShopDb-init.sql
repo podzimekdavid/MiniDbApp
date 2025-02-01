@@ -1,4 +1,13 @@
-create table Customers
+use master
+go
+
+create database ShopDatabase
+go
+
+use ShopDatabase
+go
+
+create table dbo.Customers
 (
     Email   nvarchar(450) not null
         constraint PK_Customers
@@ -8,7 +17,7 @@ create table Customers
 )
     go
 
-create table Orders
+create table dbo.Orders
 (
     OrderId    uniqueidentifier not null
         constraint PK_Orders
@@ -25,7 +34,7 @@ create index IX_Orders_CustomerId
     on Orders (CustomerId)
     go
 
-create table Products
+create table dbo.Products
 (
     ProductId uniqueidentifier not null
         constraint PK_Products
@@ -36,7 +45,7 @@ create table Products
 )
     go
 
-create table ProductInOrders
+create table dbo.ProductInOrders
 (
     OrderId   uniqueidentifier not null
         constraint FK_ProductInOrders_Orders_OrderId
