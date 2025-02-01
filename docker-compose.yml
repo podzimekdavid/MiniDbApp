@@ -6,16 +6,22 @@
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "df8ZNQa2PB46kSVthAx.bEM9r37WLTF" # TODO: move to .env
     ports:
-      - "1433:1433" # MSSQL Management connection
+      - "1433:1433" # MSSQL Management/Datagrip connection
     volumes:
       - "mssql_data:/var/opt/mssql/"
+        
   web_api:
     build:
       context: .
       dockerfile: 'MiniDbApp.API/Dockerfile'
     restart: always
+    environment:
+      - DATABASE_TYPE=mssql          #inmemory/mssql
     ports:
       - "8234:8080"
+    # TODO: map appsettings.json from persistent storage
+    depends_on:
+      - mssql_server
 
 volumes:
   mssql_data:

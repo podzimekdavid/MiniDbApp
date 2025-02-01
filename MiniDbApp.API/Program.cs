@@ -91,6 +91,11 @@ if (app.Environment.IsDevelopment())
 
 #region Create demo data
 
+if (database == Setup.Database.MSSQL)
+{
+    app.Services.ApplyMigrations();
+}
+
 app.Services.SeedDatabase();
 
 #endregion

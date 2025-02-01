@@ -1,4 +1,6 @@
-﻿using MiniDbApp.Database.Database.Tables;
+﻿using Microsoft.EntityFrameworkCore;
+using MiniDbApp.Database.Database;
+using MiniDbApp.Database.Database.Tables;
 using MiniDbApp.Database.Services;
 using Product = MiniDbApp.Models.Product.Product;
 
@@ -81,13 +83,24 @@ public static class Demo
                 
                 var order2 = orders.Create("pavel@seznam.cz");
                 orders.AddOrEditItem(order2.OrderId, p2.ProductId, 1);
-                orders.AddOrEditItem(order2.OrderId, p3.ProductId, 1);                
+                orders.AddOrEditItem(order2.OrderId, p3.ProductId, 1);
+                orders.AddOrEditItem(order2.OrderId, p1.ProductId, 1);
                 
                 var order3 = orders.Create("jirka@gmail.com");
                 orders.AddOrEditItem(order3.OrderId, p4.ProductId, 6);
                 orders.AddOrEditItem(order3.OrderId, p3.ProductId, 1);
-                orders.AddOrEditItem(order2.OrderId, p1.ProductId, 1);
+                
+                
             }
+        }
+    }
+    
+    public static void ApplyMigrations(this IServiceProvider serviceProvider)
+    {
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ShopDbContext>();
+            dbContext.Database.Migrate();
         }
     }
 }
