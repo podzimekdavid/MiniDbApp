@@ -15,7 +15,7 @@
       dockerfile: 'MiniDbApp.API/Dockerfile'
     restart: always
     ports:
-      - "81234:8080"
+      - "8234:8080"
 
 volumes:
   mssql_data:
